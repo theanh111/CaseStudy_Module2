@@ -3,8 +3,13 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -12,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import model.Deck;
 
 import java.io.*;
@@ -88,20 +94,6 @@ public class MainController implements Initializable {
         loadSizeChoiceBox();
         deckList = FXCollections.observableArrayList(readFile());
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
-//        imageColumn.setCellFactory(tc -> new TableCell<Deck, String>() {
-//            @Override
-//            protected void updateItem(String image, boolean empty) {
-//                final ImageView imageView = new ImageView();
-//                imageView.setFitHeight(100);
-//                imageView.setFitWidth(100);
-//                super.updateItem(image, empty);
-//                if (image == null || empty) {
-//                    System.out.println("e");
-//                } else {
-//                    imageView.setImage(new Image(image));
-//                }
-//            }
-//        });
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -160,6 +152,7 @@ public class MainController implements Initializable {
                     !colorText.getText().equals("") &&
                     !imageText.getText().equals("")) {
                 deckList.add(newDeck);
+                writeFile();
                 reset();
             } else if (idText.getText().equals("")) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -313,16 +306,30 @@ public class MainController implements Initializable {
         }
     }
 
+    public void logout(ActionEvent event) throws IOException {
+       if (event != null) {
+           writeFile();
+           Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+           alert.setTitle("WARNING!");
+           alert.setContentText("Are you sure to log out and Save file?");
+           Optional<ButtonType> action = alert.showAndWait();
+           if (action.get() == ButtonType.OK) {
+               Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+               Parent root = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+               primaryStage.setTitle("Skateshop Management Application");
+               primaryStage.setScene(new Scene(root, 500, 500));
+               primaryStage.centerOnScreen();
+               primaryStage.show();
+           }
+       }
+    }
+
     public void writeFile() {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("D:\\CodeGym\\Module_02\\CaseStudy_Module2\\src\\file\\SkateshopManagement.dat"));
             for (Deck deck : deckList) {
                 outputStream.writeObject(deck);
             }
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("File was saved!");
-            alert.setContentText("Saving Sucessfully!");
-            alert.showAndWait();
             outputStream.close();
         } catch (NullPointerException e) {
             e.printStackTrace();
