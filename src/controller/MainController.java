@@ -215,6 +215,7 @@ public class MainController implements Initializable {
 
     public void select(MouseEvent click) {
         if (click.getClickCount() == 2) {
+            idText.setDisable(true);
             Deck deckSelected = table.getSelectionModel().getSelectedItem();
             imagePreView.setImage(new Image(deckSelected.getImage()));
             imageText.setText(deckSelected.getImage());
@@ -279,6 +280,7 @@ public class MainController implements Initializable {
     }
 
     public void reset() {
+        idText.setDisable(false);
         imagePreView.setImage(null);
         imageText.clear();
         idText.clear();
@@ -311,7 +313,7 @@ public class MainController implements Initializable {
            writeFile();
            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
            alert.setTitle("WARNING!");
-           alert.setContentText("Are you sure to log out and Save file?");
+           alert.setContentText("Are you sure to Log Out and Save file?");
            Optional<ButtonType> action = alert.showAndWait();
            if (action.get() == ButtonType.OK) {
                Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
