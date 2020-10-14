@@ -11,4 +11,4 @@
 <br>
 <b>Mô tả:</b> Phần mềm Quản lý cửa hàng ván trượt
 <br>
-<b>Thời gian hoàn thiện:</b> 3 ngày
+<b>Thời gian hoàn thiện:</b> 4 ngày
