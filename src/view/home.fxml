@@ -100,7 +100,7 @@
                   </GridPane>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="393.0" layoutY="201.0" prefHeight="67.0" prefWidth="413.0">
+            <VBox alignment="CENTER" layoutX="395.0" layoutY="227.0" prefHeight="67.0" prefWidth="413.0">
                <children>
                   <GridPane alignment="CENTER" prefHeight="67.0" prefWidth="263.0">
                     <columnConstraints>
@@ -152,18 +152,12 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="552.0" layoutY="256.0" mnemonicParsing="false" onAction="#writeFile" prefHeight="25.0" prefWidth="93.0" text="Save File" />
             <ImageView fitHeight="319.0" fitWidth="324.0" layoutX="-9.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/skateshop-art.png" />
                </image>
             </ImageView>
             <Text fx:id="searchWarning" layoutX="280.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <ImageView disable="true" fitHeight="26.0" fitWidth="21.0" layoutX="553.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/button-savetofile.png" />
-               </image>
-            </ImageView>
             <ImageView disable="true" fitHeight="30.0" fitWidth="25.0" layoutX="240.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/button-search.png" />
